@@ -92,7 +92,7 @@
       el.classList.add('hidden');
 
       // Navigate to your validation route (controller will allow/deny & flash message)
-      const url = `/customer/die-in/validate?table=${encodeURIComponent(decodedText)}`;
+      const url = decodedText;
       // Small visual feedback
       const wait = document.createElement('div');
       wait.className = 'alert success';
