@@ -71,7 +71,7 @@ class TableController extends Controller
         $newCode = 'TBL' . str_pad($latestTableId + 1, 3, '0', STR_PAD_LEFT);
 
         // $qrContent = $newCode;
-        $qrContent = $request->name;
+        $qrContent = url('customer/die-in/validate') . '?table=' . $request->name;
         $qrPngData = QrCode::format('png')
             ->size(200)
             ->margin(1)
