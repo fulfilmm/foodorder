@@ -306,13 +306,6 @@
         <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" class="h-10 w-10 rounded-full"/>
         <span class="text-2xl font-extrabold text-green-700">Hello!</span>
       </div>
-      <div class="flex-1 max-w-lg mx-4 relative">
-        <input id="global-search" type="search"
-               placeholder="Search products, codes, categories…"
-               class="w-full border border-gray-300 rounded-full py-2 pl-10 pr-10 focus:outline-none focus:ring-2 focus:ring-green-500 transition"/>
-        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-        <i id="clear-search" class="fa-solid fa-xmark clear-btn hidden"></i>
-      </div>
       <div class="flex items-center space-x-6 ">
         <a href="{{ route('customer.take_away.home') }}" class="flex items-center text-green-700 hover:text-green-600 transition-colors duration-200 active ">
             <i class="fa-solid fa-house text-xl"></i>
@@ -336,7 +329,17 @@
 
 
     </div>
-    <div class="px-4 sm:px-6 pt-4"><h2 class="text-xl font-bold text-gray-800">Menu</h2></div>
+      <div class="w-full flex justify-center my-4">
+          <div class="w-full max-w-lg mx-4 relative">
+              <input id="global-search" type="search"
+                     placeholder="Search products, codes, categories…"
+                     class="w-full border border-gray-300 rounded-full py-2 pl-10 pr-10 focus:outline-none focus:ring-2 focus:ring-green-500 transition"/>
+              <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+              <i id="clear-search" class="fa-solid fa-xmark clear-btn hidden absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"></i>
+          </div>
+      </div>
+
+      <div class="px-4 sm:px-6 pt-4"><h2 class="text-xl font-bold text-gray-800">Menu</h2></div>
     <div class="bg-white border-t border-gray-200">
       <div class="overflow-x-auto no-scrollbar">
         <div class="flex space-x-2 px-4 sm:px-6 py-3">
@@ -349,6 +352,7 @@
         </div>
       </div>
     </div>
+
   </header>
 
   <!-- PRODUCTS GRID -->
