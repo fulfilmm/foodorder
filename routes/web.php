@@ -183,8 +183,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 
     // Orders
-    Route::get('/admin/orders/all/{filter}', [OrderController::class, 'allOrders'])->name('admin.orders.all');
+    Route::get('/admin/orders/all', [OrderController::class, 'allOrders'])->name('admin.orders.all');
+    Route::get('admin/unpaid/orders', [OrderController::class, 'unpaidOrders'])->name('admin.unpaid.orders');
     Route::get('/orders/filter', [OrderController::class, 'filterOrders'])->name('admin.orders.filter');
+    Route::get('/admin/unpaid/order/filter', [OrderController::class, 'unpaidFilterOrders'])->name('admin.unpaid.orders.filter');
+
     // Voucher Generator
     Route::get('/orders/{order}/slip', [OrderController::class, 'show'])->name('orders.slip');
     Route::get('/admin/orders/{order}', [OrderController::class, 'showOrder'])->name('admin.orders.show');
@@ -237,8 +240,10 @@ Route::middleware(['auth', 'role:manager'])->group(function () {
     Route::get('/manager/products', [ProductController::class, 'allProductShow'])->name('manager.products.all');
     Route::get('/manager/products/{product}/show', [ProductController::class, 'show'])->name('manager.products.show');
 
-    Route::get('/manager/orders/all/{filter}', [OrderController::class, 'allOrders'])->name('manager.orders.all');
+    Route::get('/manager/orders/all', [OrderController::class, 'allOrders'])->name('manager.orders.all');
+    Route::get('manager/unpaid/orders', [OrderController::class, 'unpaidOrders'])->name('manager.unpaid.orders');
     Route::get('/manager/filter', [OrderController::class, 'filterOrders'])->name('manager.orders.filter');
+    Route::get('/manager/unpaid/order/filter', [OrderController::class, 'unpaidFilterOrders'])->name('manager.unpaid.orders.filter');
     // Voucher Generator
     Route::get('/manager/orders/{order}/slip', [OrderController::class, 'showSlipManager'])->name('manager.orders.slip');
     Route::get('/manager/orders/{order}', [OrderController::class, 'showOrder'])->name('manager.orders.show');
