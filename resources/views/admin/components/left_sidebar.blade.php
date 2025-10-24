@@ -167,14 +167,16 @@
                 <div class="menu-title">Orders</div>
             </a>
             <ul class="{{ request()->routeIs('*.orders.*') ? 'mm-collapse mm-show' : '' }}">
-                <li> <a href="{{route('admin.orders.all')}}" class="{{ request()->routeIs('*.orders.all') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
+                <li> <a href="{{route('admin.orders.all','all')}}" class="{{ request()->routeIs('*.orders.all') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
                 </li>
-                {{-- <li> <a href="#" class="{{ request()->routeIs('*.orders.takeaway') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>Take Away Orders</a>
+                <li> <a href="{{route('admin.orders.all','unpaid')}}" class="{{ request()->routeIs('*.orders.all') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>Unpaid Orders</a>
                 </li>
-                <li> <a href="#" class="{{ request()->routeIs('*.orders.dinein') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>DieIn Orders</a>
-                </li>
-                <li> <a href="#" class="{{ request()->routeIs('*.orders.detail') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>Order Detail</a>
-                </li> --}}
+{{--                 <li> <a href="#" class="{{ request()->routeIs('*.orders.takeaway') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>Take Away Orders</a>--}}
+{{--                </li>--}}
+{{--                <li> <a href="#" class="{{ request()->routeIs('*.orders.dinein') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>DieIn Orders</a>--}}
+{{--                </li>--}}
+{{--                <li> <a href="#" class="{{ request()->routeIs('*.orders.detail') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>Order Detail</a>--}}
+{{--                </li> --}}
             </ul>
         </li>
         <li class="{{ request()->routeIs('*.taxes.*') ? 'mm-active' : '' }}">

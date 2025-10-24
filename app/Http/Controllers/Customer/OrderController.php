@@ -20,7 +20,32 @@ use Illuminate\Support\Facades\Log;
 class OrderController extends Controller
 {
 
-    public function allOrders()
+    public function allOrders($type)
+    {
+        $user = Auth::user();
+        if($type == 'all') {
+            $orders = Order::with(['customer', 'items', 'table'])->orderBy('created_at', 'desc')->get();
+        }else{
+            $orders = Order::with(['customer', 'items', 'table'])->orderBy('created_at', 'desc')
+                ->whereNotIn('status',['done','canceled'])->get();
+        }
+        foreach ($orders as $order) {
+            if ($order->has_add_on) {
+                $order->add_on_count = Order::where('parent_order_id', $order->id)->count();
+            } else {
+                $order->add_on_count = 0;
+            }
+        }
+        $user = Auth::user();
+
+        if ($user->role == "manager") {
+            return view('manager.orders.all-orders', compact('user', 'orders'));
+        } else {
+            return view('admin.orders.all-orders', compact('user', 'orders'));
+        }
+    }
+
+    public function unpaidOrders()
     {
         $user = Auth::user();
         $orders = Order::with(['customer', 'items', 'table'])->orderBy('created_at', 'desc')->get();

@@ -183,7 +183,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 
     // Orders
-    Route::get('/admin/orders/all', [OrderController::class, 'allOrders'])->name('admin.orders.all');
+    Route::get('/admin/orders/all/{filter}', [OrderController::class, 'allOrders'])->name('admin.orders.all');
     Route::get('/orders/filter', [OrderController::class, 'filterOrders'])->name('admin.orders.filter');
     // Voucher Generator
     Route::get('/orders/{order}/slip', [OrderController::class, 'show'])->name('orders.slip');
@@ -237,7 +237,7 @@ Route::middleware(['auth', 'role:manager'])->group(function () {
     Route::get('/manager/products', [ProductController::class, 'allProductShow'])->name('manager.products.all');
     Route::get('/manager/products/{product}/show', [ProductController::class, 'show'])->name('manager.products.show');
 
-    Route::get('/manager/orders/all', [OrderController::class, 'allOrders'])->name('manager.orders.all');
+    Route::get('/manager/orders/all/{filter}', [OrderController::class, 'allOrders'])->name('manager.orders.all');
     Route::get('/manager/filter', [OrderController::class, 'filterOrders'])->name('manager.orders.filter');
     // Voucher Generator
     Route::get('/manager/orders/{order}/slip', [OrderController::class, 'showSlipManager'])->name('manager.orders.slip');
