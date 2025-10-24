@@ -19,39 +19,31 @@
     <tr data-id="{{ $order->id }}"
         data-kind="{{ $isAddon ? 'addon' : 'main' }}"
         data-parent-id="{{ $order->parent_order_id ?? '' }}">
-        <td>
-            <div class="d-flex align-items-center gap-2">
-                <span class="fw-semibold">#{{ $order->order_no }}</span>
-            </div>
-        </td>
 
-        <td>
-            <div class="badge text-success rounded-pill bg-light-{{ $order->table_id ? 'primary' : 'secondary' }}">
-                {{ $order->table->name ?? 'No' }}
-            </div>
-        </td>
-
+        <td>#{{ $order->order_no }}</td>
+        <td>{{ $order->table->name ?? 'No' }}</td>
         <td>{{ number_format($order->total) }} MMK</td>
         <td>
             <span class="status-badge badge w-100 rounded-pill {{ $badgeClass }}"
                   data-order-id="{{ $order->id }}">
                 {{ ucfirst($order->status) }}
             </span>
+
         </td>
         <td>
-            <div class="d-flex align-items-center gap-2">
-                <select class="form-select form-select-sm change-status" style="max-width: 20px;" data-id="{{ $order->id }}">
+            <div class="d-flex align-items-start gap-2 ">
+                <select class="form-select form-select-sm change-status"  data-id="{{ $order->id }}">
                     @foreach(['pending','confirmed','preparing','delivered','eating','done','canceled'] as $st)
                         <option value="{{ $st }}" {{ $order->status === $st ? 'selected' : '' }}>
                             {{ ucfirst($st) }}
                         </option>
                     @endforeach
                 </select>
-
-                <a href="{{ route('manager.orders.slip', [$order->id, 'print' => 1, 'paper' => '80', 'mode' => 'detailed']) }}" class="btn btn-sm btn-success">
+                <a href="{{ route('orders.slip', [$order->id, 'print' => 1, 'paper' => '80', 'mode' => 'detailed']) }}" class="btn btn-sm btn-success">
                     Voucher Print
                 </a>
-                <a href="{{ route('manager.orders.show',[$order->id]) }}" class="btn btn-sm btn-outline-info">
+
+                <a href="{{ route('admin.orders.show', [$order->id]) }}" class="btn btn-sm btn-outline-info">
                     <i class="bx bx-show"></i>
                 </a>
             </div>
