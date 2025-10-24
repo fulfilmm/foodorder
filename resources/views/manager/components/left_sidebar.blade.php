@@ -113,7 +113,9 @@
                 <div class="menu-title">Orders</div>
             </a>
             <ul class="{{ request()->routeIs('*.orders.*') ? 'mm-collapse mm-show' : '' }}">
-                <li> <a href="{{route('manager.orders.all')}}" class="{{ request()->routeIs('*.orders.all') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
+                <li> <a href="{{route('manager.orders.all','all')}}" class="{{ request()->routeIs('*.orders.all') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
+                </li>
+                <li> <a href="{{route('manager.orders.all','unpaid')}}" class="{{ request()->routeIs('*.orders.all') ? 'active' : '' }}"><i class="bx bx-right-arrow-alt"></i>Unpaid Orders</a>
                 </li>
             </ul>
         </li>
