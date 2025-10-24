@@ -20,15 +20,12 @@ use Illuminate\Support\Facades\Log;
 class OrderController extends Controller
 {
 
-    public function allOrders($type)
+    public function allOrders()
     {
         $user = Auth::user();
-        if($type == 'all') {
+
             $orders = Order::with(['customer', 'items', 'table'])->orderBy('created_at', 'desc')->get();
-        }else{
-            $orders = Order::with(['customer', 'items', 'table'])->orderBy('created_at', 'desc')
-                ->whereNotIn('status',['done','canceled'])->get();
-        }
+
         foreach ($orders as $order) {
             if ($order->has_add_on) {
                 $order->add_on_count = Order::where('parent_order_id', $order->id)->count();
@@ -48,7 +45,8 @@ class OrderController extends Controller
     public function unpaidOrders()
     {
         $user = Auth::user();
-        $orders = Order::with(['customer', 'items', 'table'])->orderBy('created_at', 'desc')->get();
+        $orders = Order::with(['customer', 'items', 'table'])->orderBy('created_at', 'desc')
+            ->whereNotIn('status',['done','canceled'])->get();
         foreach ($orders as $order) {
             if ($order->has_add_on) {
                 $order->add_on_count = Order::where('parent_order_id', $order->id)->count();
@@ -57,12 +55,12 @@ class OrderController extends Controller
             }
         }
         $user = Auth::user();
-
         if ($user->role == "manager") {
-            return view('manager.orders.all-orders', compact('user', 'orders'));
+            return view('manager.orders.unpaid_order', compact('user', 'orders'));
         } else {
-            return view('admin.orders.all-orders', compact('user', 'orders'));
+            return view('admin.orders.unpaid_order', compact('user', 'orders'));
         }
+
     }
 
     public function filterOrders(Request $request)
@@ -106,6 +104,50 @@ class OrderController extends Controller
                 'html' => view('admin.orders.partials.orders_table_rows', compact('orders'))->render()
             ]);
         }
+    }
+
+    public function unpaidFilterOrders(Request $request)
+    {
+        $status = $request->input('status');
+        $date = $request->input('date');
+        $week = $request->input('week');
+        $year = $request->input('year');
+        $range = $request->input('range');
+
+        $orders = Order::with(['table', 'customer', 'items'])
+            ->whereNotIn('status',['done','canceled'])
+            ->when($status, fn($q) => $q->where('status', $status))
+            ->when($date, fn($q) => $q->whereDate('created_at', $date))
+            ->when($week, function ($q) use ($week) {
+                $dates = explode(" to ", str_replace(" ", "", $week));
+                if (count($dates) === 2) {
+                    $q->whereBetween('created_at', [$dates[0], $dates[1]]);
+                }
+            })
+            ->when($year, fn($q) => $q->whereYear('created_at', $year))
+            ->when($range, function ($q) use ($range) {
+                $dates = explode(" to ", str_replace(" ", "", $range));
+                if (count($dates) === 2) {
+                    $q->whereBetween('created_at', [$dates[0], $dates[1]]);
+                }
+            })
+            ->latest()
+            ->get();
+
+        foreach ($orders as $order) {
+            $order->add_on_count = $order->has_add_on ? Order::where('parent_order_id', $order->id)->count() : 0;
+        }
+        $user = Auth::user();
+        if ($user->role == "manager") {
+            return response()->json([
+                'html' => view('manager.orders.partials.unpaid_order_table', compact('orders'))->render()
+            ]);
+        } else {
+            return response()->json([
+                'html' => view('admin.orders.partials.unpaid_order_table', compact('orders'))->render()
+            ]);
+        }
+
     }
     // public function show(Request $request, Order $order)
     // {
