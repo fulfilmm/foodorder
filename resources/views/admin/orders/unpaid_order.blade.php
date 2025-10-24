@@ -1,4 +1,4 @@
-@extends('manager.layouts.app')
+@extends('admin.layouts.app')
 
 @section('custom-css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -8,6 +8,9 @@
         select.change-status{ width:100% !important; min-width:140px; }
         td select.form-select{ max-width:100%; }
         .status-badge { white-space: nowrap; }
+        th{
+            width: 20%;
+        }
     </style>
 @endsection
 
@@ -78,7 +81,7 @@
                             </tr>
                             </thead>
                             <tbody id="orders-table-body">
-                            @include('manager.orders.partials.unpaid_order_table', ['orders' => $orders])
+                            @include('admin.orders.partials.unpaid_order_table', ['orders' => $orders])
                             </tbody>
                         </table>
                     </div>

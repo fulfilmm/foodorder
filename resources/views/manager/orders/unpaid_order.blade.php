@@ -8,6 +8,9 @@
         select.change-status{ width:100% !important; min-width:140px; }
         td select.form-select{ max-width:100%; }
         .status-badge { white-space: nowrap; }
+        th{
+            width: 20%;
+        }
     </style>
 @endsection
 
