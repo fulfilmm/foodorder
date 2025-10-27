@@ -906,6 +906,11 @@
       </div>
 
       <div id="menuTabs" class="overflow-x-auto whitespace-nowrap pb-2 space-x-2 flex no-scrollbar">
+          <button
+              class="menu-tab px-4 py-1 rounded-full font-semibold bg-green-600 text-white"
+              onclick="fetchMenu('all')"
+              data-category="all"
+          >All</button>
         @foreach($categories as $category)
           <button
             class="menu-tab px-4 py-1 rounded-full font-semibold {{ $loop->first ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700' }}"
