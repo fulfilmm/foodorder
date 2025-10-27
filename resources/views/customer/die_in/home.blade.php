@@ -371,7 +371,7 @@ function updateQuantity(index, change, price) {
     @endif</h2>
 
   </div> --}}
-    <div class="w-full flex justify-center my-4">
+    <div class="w-full flex justify-center">
         <div class="w-full max-w-lg mx-4 relative">
             <input id="global-search" type="search"
                    placeholder="Search products, codes, categories…"
@@ -414,7 +414,7 @@ function updateQuantity(index, change, price) {
 </header>
 
 <!-- PRODUCTS GRID -->
-<main id="scroll-container" class="pt-48 pb-24 h-full overflow-y-auto no-scrollbar px-4 sm:px-6">
+<main id="scroll-container" class="pt-60 pb-24 h-full overflow-y-auto no-scrollbar px-4 sm:px-6">
   <div id="menu" class="grid
             grid-cols-2
             max-[360px]:grid-cols-1
