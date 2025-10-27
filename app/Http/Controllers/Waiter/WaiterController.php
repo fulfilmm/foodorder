@@ -67,8 +67,7 @@ class WaiterController extends Controller
 
         // Categories for the menu section
         $categories = Category::orderBy('name')->get();
-        $firstCategoryName = $categories->first()->name ?? null;
-
+        $firstCategoryName = 'all';
         // Active taxes chips (optional)
         $activeTaxes = Tax::where('is_active', true)->get(['name', 'percent']);
 
