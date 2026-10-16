@@ -23,22 +23,25 @@ git clone https://github.com/fulfilmm/foodorder.git
   ```
   ``` 
   npm install
- ```
+  ```
   ```
   php artisan key:generate
- ```
+  ```
   ``` 
   php artian migrate
- ```
+  ```
   ``` 
   php artisan db:seed
- ```
+  ```
+  ```
+  npm run build
+  ```
   ``` 
   php artisan serve
- ```
+  ```
   and then open a new terminal tab and the run the following queue work command for live time notification
- ```
+  ```
  php artisan queue:work
-```
+ ```
 
  
